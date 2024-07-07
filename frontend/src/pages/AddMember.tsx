@@ -34,9 +34,9 @@ export function AddMember() {
         ifsc: '',
         bank_name: '',
         bank_add: '',
-        loan_guarantee:'',
-        shares:0,
-        status:''
+        loan_guarantee: '',
+        shares: 0,
+        status: ''
     })
 
     const handleChange = (e: React.ChangeEvent<any>) => {
@@ -61,7 +61,7 @@ export function AddMember() {
             variant: "default",
             title: "Adding Member Data.",
         })
-        const response = await fetch('http://localhost:5000/api/auth/addmember', {
+        const response = await fetch('https://member-data-qtrd.onrender.com/api/auth/addmember', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

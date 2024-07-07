@@ -56,7 +56,7 @@ export const EditMember = () => {
     const submit = async () => {
         try {
 
-            const response = await fetch(`http://localhost:5000/api/auth/editmember/${id}`, {
+            const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/editmember/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

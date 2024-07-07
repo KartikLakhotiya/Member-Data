@@ -66,9 +66,9 @@ export type Member = {
   ifsc: string;
   bank_name: string;
   bank_add: string;
-  loan_guarantee:string;
-  shares:number;
-  status:string;
+  loan_guarantee: string;
+  shares: number;
+  status: string;
 };
 
 export const columns: ColumnDef<Member>[] = [
@@ -106,7 +106,11 @@ export function AllMembers() {
   const navigate = useNavigate();
 
   const fetchAllMembers = async () => {
-    const response = await fetch('http://localhost:5000/api/auth/allmembers', {
+    toast({
+      variant:'default',
+      title:'Fetching Members Data.'
+    })
+    const response = await fetch('https://member-data-qtrd.onrender.com/api/auth/allmembers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -114,6 +118,10 @@ export function AllMembers() {
     });
     const data = await response.json();
     setAllMembers(data);
+    toast({
+      variant:'success',
+      title:'Members Data Fetched.'
+    })
   };
   React.useEffect(() => {
     fetchAllMembers();
@@ -181,7 +189,7 @@ export function AllMembers() {
     });
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/delete/${id}`, {
+      const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/delete/${id}`, {
         method: 'DELETE',
       });
 
@@ -196,7 +204,7 @@ export function AllMembers() {
         title: "Member Deleted.",
       });
       fetchAllMembers();
-      
+
 
     } catch (error) {
       console.log(error);
