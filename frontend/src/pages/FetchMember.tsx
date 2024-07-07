@@ -93,7 +93,7 @@ export function FetchMember() {
             <div className="sm:flex sm:mx-0 flex-col lg:mx-48">
                 <Card className="w-[430px] mr-auto ml-auto mt-8">
                     <CardHeader>
-                        <CardTitle>Fetch Member</CardTitle>
+                        <CardTitle>Search Member</CardTitle>
                         <CardDescription>
                             Fetch details of a member from the Database.
                         </CardDescription>
