@@ -40,7 +40,7 @@ const Navbar = () => {
                                     <Link to='/add'><Button variant="outline" onClick={() => setIsOpen(false)}>ADD MEMBER</Button></Link>
                                 </li>
                                 <li>
-                                    <Link to='/fetch'><Button variant="outline" onClick={() => setIsOpen(false)}>FETCH MEMBER</Button></Link>
+                                    <Link to='/fetch'><Button variant="outline" onClick={() => setIsOpen(false)}>SEARCH MEMBER</Button></Link>
                                 </li>
                                 {/* <li>
                                     <Link to='/allstudents'><Button variant="outline" onClick={() => setIsOpen(false)}>ALL STUDENTS</Button></Link>
