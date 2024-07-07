@@ -149,10 +149,10 @@ export function FetchMember() {
                                                         F/H Name : {member.fh_name}
                                                     </Label>
                                                     <Label htmlFor="name" className="text-lg">
-                                                        Gender : {member.gender}
+                                                        DOB : {member.dob}
                                                     </Label>
                                                     <Label htmlFor="name" className="text-lg">
-                                                        DOB : {member.dob}
+                                                        Gender : {member.gender}
                                                     </Label>
 
                                                     <Label htmlFor="name" className="text-lg">
@@ -169,6 +169,9 @@ export function FetchMember() {
                                                     </Label>
                                                 </div>
                                                 <div className="flex flex-col">
+                                                    <Label htmlFor="name" className="text-lg">
+                                                        Membership Date : {member.membership_date}
+                                                    </Label>
                                                     <Label htmlFor="name" className="text-lg">
                                                         Phone : {member.phone}
                                                     </Label>
