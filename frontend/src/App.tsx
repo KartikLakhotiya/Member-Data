@@ -4,12 +4,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from './components/ui/toaster'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { Button } from './components/ui/button';
-import Sidebar from './components/Sidebar';
 import { AllMembers } from './pages/AllMembers';
 import { FetchMember } from './pages/FetchMember';
 import { AddMember } from './pages/AddMember';
-import { DataTableDemo } from './components/DataTable';
 import { EditMember } from './pages/EditMember';
 
 function App() {
@@ -28,7 +25,6 @@ function App() {
           <Route path='/' element={<AllMembers/>} />
           <Route path='/fetch' element={<FetchMember/>} />
           <Route path='/add' element={<AddMember/>} />
-          <Route path='/datatable' element={<DataTableDemo/>} />
           <Route path='/edit-member/:id' element={<EditMember/>} />
         </Routes>
       </Router>
