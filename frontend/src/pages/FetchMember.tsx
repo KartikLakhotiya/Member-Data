@@ -139,6 +139,9 @@ export function FetchMember() {
                                                     <Label htmlFor="name" className="text-lg">
                                                         Member ID : {member.member_id}
                                                     </Label>
+                                                    <Label htmlFor="name" className="text-lg">
+                                                        Membership Date : {member.membership_date}
+                                                    </Label>
                                                     <Label htmlFor="name" className="text-lg font-bold">
                                                         Family Head : {member.familyHead}
                                                     </Label>
@@ -169,9 +172,6 @@ export function FetchMember() {
                                                     </Label>
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <Label htmlFor="name" className="text-lg">
-                                                        Membership Date : {member.membership_date}
-                                                    </Label>
                                                     <Label htmlFor="name" className="text-lg">
                                                         Phone : {member.phone}
                                                     </Label>
