@@ -64,6 +64,12 @@ const memberSchema = new mongoose.Schema({
     },
     status: {
         type: String
+    },
+    profileImage: {
+        type: String
+    },
+    signature: {
+        type: String
     }
 }, { timestamps: true })
 

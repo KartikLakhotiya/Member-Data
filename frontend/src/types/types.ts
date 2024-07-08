@@ -19,5 +19,7 @@ export interface Member {
     bank_add: string,
     loan_guarantee: String,
     shares: number,
-    status: string
+    status: string,
+    profileImage: string,
+    signature: string
 }

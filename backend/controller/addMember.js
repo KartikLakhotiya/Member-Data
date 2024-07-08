@@ -4,7 +4,7 @@ export const addMember = async (req, res) => {
 
     try {
 
-        const { member_id, familyHead, name, phone, dob, nominee, age, relation, membership_date, address, gender, fh_name, aadhar, bankacc_no, ifsc, bank_name, bank_add, loan_guarantee, shares, status } = req.body
+        const { member_id, familyHead, name, phone, dob, nominee, age, relation, membership_date, address, gender, fh_name, aadhar, bankacc_no, ifsc, bank_name, bank_add, loan_guarantee, shares, status, profileImage, signature } = req.body
 
         const newMember = new Member({
             member_id,
@@ -25,7 +25,9 @@ export const addMember = async (req, res) => {
             bank_add,
             loan_guarantee,
             shares,
-            status
+            status,
+            profileImage,
+            signature
         })
 
         if (newMember) {
@@ -52,7 +54,9 @@ export const addMember = async (req, res) => {
                 bank_add: newMember.bank_add,
                 loan_guarantee: newMember.loan_guarantee,
                 shares: newMember.shares,
-                status: newMember.status
+                status: newMember.status,
+                profileImage: newMember.profileImage,
+                signature: newMember.signature
 
             })
 

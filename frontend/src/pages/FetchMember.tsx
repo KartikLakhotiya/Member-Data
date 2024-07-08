@@ -72,6 +72,7 @@ export function FetchMember() {
         const fetchedMember = response.json();
         fetchedMember
             .then((obj) => {
+                console.log(obj)
                 setMember(obj);
             })
             .catch((err) => console.log(err));
@@ -133,9 +134,13 @@ export function FetchMember() {
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
-                                        <div className="grid w-full items-center">
+                                        <div className=" w-full items-center flex">
+                                            <div className="flex flex-col mr-11">
+                                                <img src={member.profileImage} height={200} width={200} alt="" />
+                                                <img src={member.signature} height={200} width={200} alt="" />
+                                            </div>
                                             <div className="flex space-y-1.5">
-                                                <div className="flex flex-col mr-72">
+                                                <div className="flex flex-col mr-20">
                                                     <Label htmlFor="name" className="text-lg">
                                                         Member ID : {member.member_id}
                                                     </Label>
@@ -171,7 +176,7 @@ export function FetchMember() {
                                                         Address : {member.address}
                                                     </Label>
                                                 </div>
-                                                <div className="flex flex-col">
+                                                <div className="flex flex-col ">
                                                     <Label htmlFor="name" className="text-lg">
                                                         Phone : {member.phone}
                                                     </Label>

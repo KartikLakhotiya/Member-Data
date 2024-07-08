@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
+import { ChangeEvent, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/components/ui/use-toast"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
-
+import axios from 'axios';
 
 export function AddMember() {
-    const inputRef = useRef<any>(null);
+    const inputRef = useRef(null);
 
     const [memberData, setMemberData] = useState({
         member_id: 0,
@@ -36,10 +36,24 @@ export function AddMember() {
         bank_add: '',
         loan_guarantee: '',
         shares: 0,
-        status: ''
-    })
+        status: '',
+        profileImage: '',
+        signature: ''
+    });
 
-    const handleChange = (e: React.ChangeEvent<any>) => {
+    interface FileType {
+        [key: string]: File | null;
+    }
+
+    const [files, setFiles] = useState<FileType>({ profileImage: null, signature: null });
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>, fileType: string) => {
+        if (e.target.files) {
+            setFiles({ ...files, [fileType]: e.target.files[0] });
+        }
+    };
+
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
         setMemberData((prevData) => ({
             ...prevData,
@@ -47,46 +61,66 @@ export function AddMember() {
         }));
     };
 
-    const focusInput = () => {
-        inputRef.current.focus();
-    }
+    const { toast } = useToast();
 
+    const uploadToCloudinary = async (file: string | Blob) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'member-data'); // Replace with your Cloudinary upload preset
 
-    const { toast } = useToast()
+        const response = await axios.post('https://api.cloudinary.com/v1_1/dk5qxgvo4/image/upload', formData); // Replace with your Cloudinary cloud name
 
+        return response.data.secure_url; // Return the URL of the uploaded image
+    };
 
-    const submit = async (e: { preventDefault: () => void }) => {
+    const submit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         toast({
             variant: "default",
             title: "Adding Member Data.",
-        })
-        const response = await fetch('https://member-data-qtrd.onrender.com/api/auth/addmember', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(memberData)
-        })
-        if (response.ok) {
-            toast({
-                variant: "success",
-                title: "Member Added.",
-            })
-        }
-        else {
+        });
+
+        try {
+            const profileImageUrl = files.profileImage ? await uploadToCloudinary(files.profileImage) : '';
+            const signatureUrl = files.signature ? await uploadToCloudinary(files.signature) : '';
+
+            const memberDataWithFiles = {
+                ...memberData,
+                profileImage: profileImageUrl,
+                signature: signatureUrl
+            };
+
+            console.log('Member Data with Files:', memberDataWithFiles);
+
+            const response = await fetch('http://localhost:5000/api/auth/addmember', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(memberDataWithFiles)
+            });
+
+            if (response.ok) {
+                toast({
+                    variant: "success",
+                    title: "Member Added.",
+                });
+            } else {
+                const errorData = await response.json();
+                console.error('Error response from backend:', errorData);
+                toast({
+                    variant: "destructive",
+                    title: 'Some error occurred.',
+                });
+            }
+        } catch (error) {
+            console.error('Error during file upload:', error);
             toast({
                 variant: "destructive",
-                title: 'Some error occured.'
-            })
-            return
+                title: 'File upload failed.',
+            });
         }
-        console.log(memberData)
-
-    }
-    useEffect(() => {
-        focusInput();
-    }, [])
+    };
 
     return (
         <motion.div
@@ -94,13 +128,12 @@ export function AddMember() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2 }}
         >
-            <Card className="w-[800px] mr-auto ml-auto mt-4 mb-0 ">
+            <Card className="w-[800px] mr-auto ml-auto mt-4 mb-0">
                 <CardHeader>
                     <CardTitle>Add Member</CardTitle>
                     <CardDescription>Add a new member to the Database.</CardDescription>
                 </CardHeader>
                 <CardContent>
-
                     <div className="grid w-full items-center gap-4">
                         <div className="flex">
                             <div className="flex flex-col space-y-1.5 mr-11">
@@ -149,63 +182,74 @@ export function AddMember() {
 
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="age">Address</Label>
-                                <Input id="age" type="text" placeholder="Enter Address" name='address' className="w-44" onChange={handleChange} />
+                                <Label htmlFor="address">Address</Label>
+                                <Input id="address" type="text" placeholder="Enter Address" name='address' className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="relation">Gender</Label>
-                                <Input id="relation" placeholder="Enter Gender" type="text" name='gender' onChange={handleChange} />
+                                <Label htmlFor="gender">Gender</Label>
+                                <Input id="gender" placeholder="Enter Gender" type="text" name='gender' onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="membership-date">F/H Name</Label>
-                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='fh_name' onChange={handleChange} />
+                                <Label htmlFor="fh_name">F/H Name</Label>
+                                <Input id="fh_name" placeholder="Enter F/H Name" type="text" name='fh_name' onChange={handleChange} />
                             </div>
                         </div>
+
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="age">Aadhar</Label>
-                                <Input id="age" type="text" placeholder="Enter Aadhar Number" name='aadhar' className="w-44" onChange={handleChange} />
+                                <Label htmlFor="aadhar">Aadhar</Label>
+                                <Input id="aadhar" type="text" placeholder="Enter Aadhar Number" name='aadhar' className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="relation">Bank Account Number</Label>
-                                <Input id="relation" placeholder="Enter Bank Acc No." type="text" name='bankacc_no' onChange={handleChange} />
+                                <Label htmlFor="bankacc_no">Bank Account Number</Label>
+                                <Input id="bankacc_no" placeholder="Enter Bank Acc No." type="text" name='bankacc_no' onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="membership-date">IFSC Code</Label>
-                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='ifsc' onChange={handleChange} />
+                                <Label htmlFor="ifsc">IFSC Code</Label>
+                                <Input id="ifsc" placeholder="Enter IFSC Code" type="text" name='ifsc' onChange={handleChange} />
                             </div>
                         </div>
+
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-24 w-72">
-                                <Label htmlFor="age">Bank Name</Label>
-                                <Input id="age" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72" onChange={handleChange} />
+                                <Label htmlFor="bank_name">Bank Name</Label>
+                                <Input id="bank_name" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="relation">Bank Address</Label>
-                                <Input id="relation" placeholder="Enter Bank Address" type="text" name='bank_add' className="w-72" onChange={handleChange} />
+                                <Label htmlFor="bank_add">Bank Address</Label>
+                                <Input id="bank_add" placeholder="Enter Bank Address" type="text" name='bank_add' className="w-72" onChange={handleChange} />
+                            </div>
+                        </div>
+
+                        <div className="flex mt-4">
+                            <div className="flex flex-col space-y-1.5 mr-11">
+                                <Label htmlFor="loan_guarantee">Loan Guarantee</Label>
+                                <Input id="loan_guarantee" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' className="w-56" onChange={handleChange} />
+                            </div>
+                            <div className="flex flex-col space-y-1.5 mr-11">
+                                <Label htmlFor="shares">Shares</Label>
+                                <Input id="shares" placeholder="Enter No. of Shares" type="text" name='shares' onChange={handleChange} />
+                            </div>
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="status">Status</Label>
+                                <Input id="status" placeholder="Enter Status" type="text" name='status' onChange={handleChange} />
                             </div>
                         </div>
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="age">Loan Guarantee</Label>
-                                <Input id="age" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' className="w-56" onChange={handleChange} />
+                                <Label htmlFor="profile-image">Profile Image</Label>
+                                <Input id="profile-image" name='profileImage' type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'profileImage')} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="relation">Shares</Label>
-                                <Input id="relation" placeholder="Enter No. of Shares" type="text" name='shares' onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="membership-date">Status</Label>
-                                <Input id="membership-date" placeholder="Enter Status" type="text" name='status' onChange={handleChange} />
+                                <Label htmlFor="signature">Signature</Label>
+                                <Input id="signature" type="file" name="signature" accept="image/*" onChange={(e) => handleFileChange(e, 'signature')} />
                             </div>
                         </div>
 
                         <Button className="mt-4 w-[20rem] items-center justify-center mr-auto ml-auto" type="submit" onClick={submit}>Submit</Button>
                     </div>
-
-
                 </CardContent>
             </Card>
         </motion.div>
-    )
+    );
 }
