@@ -23,3 +23,7 @@ export interface Member {
     profileImage: string,
     signature: string
 }
+
+export interface FileType {
+    [key: string]: File | null;
+}

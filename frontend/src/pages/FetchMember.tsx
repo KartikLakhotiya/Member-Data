@@ -126,7 +126,7 @@ export function FetchMember() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 2 }}
                             >
-                                <Card className="mt-5" key={index}>
+                                <Card className="mt-5 mb-5" key={index}>
                                     <CardHeader>
                                         <CardTitle>Member Found</CardTitle>
                                         <CardDescription>
@@ -136,11 +136,11 @@ export function FetchMember() {
                                     <CardContent>
                                         <div className=" w-full items-center flex">
                                             <div className="flex flex-col mr-11">
-                                                <img src={member.profileImage} height={200} width={200} alt="" />
-                                                <img src={member.signature} height={200} width={200} alt="" />
+                                                <img src={member.profileImage} height={200} width={200} alt="Profile Image" className="border border-solid border-gray-800 mb-2" />
+                                                <img src={member.signature} height={200} width={200} alt="Signature" className="border border-solid border-gray-800" />
                                             </div>
                                             <div className="flex space-y-1.5">
-                                                <div className="flex flex-col mr-20">
+                                                <div className="flex flex-col mr-11">
                                                     <Label htmlFor="name" className="text-lg">
                                                         Member ID : {member.member_id}
                                                     </Label>
@@ -176,7 +176,7 @@ export function FetchMember() {
                                                         Address : {member.address}
                                                     </Label>
                                                 </div>
-                                                <div className="flex flex-col ">
+                                                <div className="flex flex-col">
                                                     <Label htmlFor="name" className="text-lg">
                                                         Phone : {member.phone}
                                                     </Label>

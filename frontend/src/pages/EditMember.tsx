@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -12,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from '@/components/ui/use-toast'
+import axios from 'axios'
 
 export const EditMember = () => {
     const { id } = useParams();
@@ -37,7 +37,9 @@ export const EditMember = () => {
         bank_add: '',
         loan_guarantee: '',
         shares: 0,
-        status: ''
+        status: '',
+        profileImage: '',
+        signature: ''
     })
     const inputRef = useRef<any>(null);
 
@@ -49,12 +51,37 @@ export const EditMember = () => {
         }));
     };
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const url = await uploadToCloudinary(file);
+            setMemberData((prevData) => ({
+                ...prevData,
+                [fieldName]: url
+            }));
+        }
+    };
+
+    const uploadToCloudinary = async (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'member-data'); // Use your unsigned upload preset name
+
+        const response = await axios.post('https://api.cloudinary.com/v1_1/dk5qxgvo4/image/upload', formData); // Replace with your Cloudinary cloud name
+
+        return response.data.secure_url; // Return the URL of the uploaded image
+    };
+
     const focusInput = () => {
         inputRef.current.focus();
     }
 
     const submit = async () => {
         try {
+            toast({
+                variant: "default",
+                title: "Editing Member Data"
+            })
 
             const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/editmember/${id}`, {
                 method: 'POST',
@@ -66,7 +93,7 @@ export const EditMember = () => {
             if (!response.ok) {
                 toast({
                     variant: 'destructive',
-                    title: 'Some error occured.'
+                    title: 'Some error occurred.'
                 })
                 return
             }
@@ -79,8 +106,7 @@ export const EditMember = () => {
             })
             navigate('/')
 
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error)
         }
     }
@@ -194,6 +220,16 @@ export const EditMember = () => {
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">Status</Label>
                                 <Input id="membership-date" placeholder="Enter Status" type="text" name='status' onChange={handleChange} />
+                            </div>
+                        </div>
+                        <div className="flex mt-4">
+                            <div className="flex flex-col space-y-1.5 mr-11">
+                                <Label htmlFor="profile-image">Profile Image</Label>
+                                <Input id="profile-image" name='profileImage' type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'profileImage')} />
+                            </div>
+                            <div className="flex flex-col space-y-1.5 mr-11">
+                                <Label htmlFor="signature">Signature</Label>
+                                <Input id="signature" type="file" name="signature" accept="image/*" onChange={(e) => handleFileChange(e, 'signature')} />
                             </div>
                         </div>
 

@@ -100,8 +100,8 @@ export function AllMembers() {
 
   const fetchAllMembers = async () => {
     toast({
-      variant:'default',
-      title:'Fetching Members Data.'
+      variant: 'default',
+      title: 'Fetching Members Data.'
     })
     const response = await fetch('https://member-data-qtrd.onrender.com/api/auth/allmembers', {
       method: 'POST',
@@ -112,8 +112,8 @@ export function AllMembers() {
     const data = await response.json();
     setAllMembers(data);
     toast({
-      variant:'success',
-      title:'Members Data Fetched.'
+      variant: 'success',
+      title: 'Members Data Fetched.'
     })
   };
   React.useEffect(() => {
@@ -284,7 +284,7 @@ export function AllMembers() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center custom-table-cell">
+                <TableCell colSpan={columns.length} className="h-24 custom-table-cell">
                   No results.
                 </TableCell>
               </TableRow>

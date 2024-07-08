@@ -1,7 +1,7 @@
 import Member from "../model/memberModel.js"
 
 export const editMember = async (req, res) => {
-    let { member_id, familyHead, name, phone, dob, nominee, age, relation, membership_date, address, gender, fh_name, aadhar, bankacc_no, ifsc, bank_name, bank_add, loan_guarantee, shares, status } = req.body
+    let { member_id, familyHead, name, phone, dob, nominee, age, relation, membership_date, address, gender, fh_name, aadhar, bankacc_no, ifsc, bank_name, bank_add, loan_guarantee, shares, status, profileImage, signature } = req.body
 
     try {
         const member = await Member.findById(req.params.id);
@@ -31,6 +31,9 @@ export const editMember = async (req, res) => {
         member.loan_guarantee = loan_guarantee || member.loan_guarantee;
         member.shares = shares || member.shares;
         member.status = status || member.status;
+        member.profileImage = profileImage || member.profileImage;
+        member.signature = signature || member.signature;
+
 
 
         await member.save();
