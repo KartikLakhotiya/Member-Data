@@ -92,7 +92,7 @@ export function AddMember() {
 
             console.log('Member Data with Files:', memberDataWithFiles);
 
-            const response = await fetch('http://localhost:5000/api/auth/addmember', {
+            const response = await fetch('https://member-data-qtrd.onrender.com/api/auth/addmember', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
