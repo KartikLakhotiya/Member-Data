@@ -76,6 +76,30 @@ export const EditMember = () => {
         inputRef.current.focus();
     }
 
+    const fetchMemberData = async () => {
+        try {
+            const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/find/${id}`,{
+                method:'POST'
+            });
+            if (response.ok) {
+                const member = await response.json();
+                console.log(member);
+                setMemberData(member);
+            } else {
+                toast({
+                    variant: 'destructive',
+                    title: 'Failed to fetch member data.'
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            toast({
+                variant: 'destructive',
+                title: 'An error occurred while fetching member data.'
+            });
+        }
+    };
+
     const submit = async () => {
         try {
             toast({
@@ -98,6 +122,8 @@ export const EditMember = () => {
                 return
             }
 
+            console.log(response)
+
             const member = await response.json();
             setMemberData(member)
             toast({
@@ -112,6 +138,7 @@ export const EditMember = () => {
     }
 
     useEffect(() => {
+        fetchMemberData();
         focusInput();
     }, [])
 
@@ -128,98 +155,98 @@ export const EditMember = () => {
                         <div className="flex">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="member-id">Member ID</Label>
-                                <Input id="member-id" type="text" ref={inputRef} name='member_id' className="w-44" placeholder="Enter Member ID" onChange={handleChange} />
+                                <Input id="member-id" type="text" ref={inputRef} name='member_id' value={memberData.member_id} className="w-44" placeholder="Enter Member ID" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="family-head">Family Head</Label>
-                                <Input id="family-head" placeholder="Enter Family Head" name='familyHead' className="w-66" type="text" onChange={handleChange} />
+                                <Input id="family-head" placeholder="Enter Family Head" name='familyHead'value={memberData.familyHead} className="w-66" type="text" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" placeholder="Enter Name" type="text" name='name' onChange={handleChange} />
+                                <Input id="name" placeholder="Enter Name" type="text" name='name' value={memberData.name} onChange={handleChange} />
                             </div>
                         </div>
 
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="phone-number">Phone Number</Label>
-                                <Input id="phone-number" type="text" placeholder="Enter Phone Number" name='phone' className="w-44" onChange={handleChange} />
+                                <Input id="phone-number" type="text" placeholder="Enter Phone Number" name='phone'value={memberData.phone} className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="dob">DOB</Label>
-                                <Input id="dob" placeholder="Enter DOB" type="text" name='dob' onChange={handleChange} />
+                                <Input id="dob" placeholder="Enter DOB" type="text" name='dob' value={memberData.dob} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="nominee">Nominee</Label>
-                                <Input id="nominee" placeholder="Enter Nominee Name" name='nominee' type="text" onChange={handleChange} />
+                                <Input id="nominee" placeholder="Enter Nominee Name" name='nominee'value={memberData.nominee} type="text" onChange={handleChange} />
                             </div>
                         </div>
 
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="age">Age</Label>
-                                <Input id="age" type="text" placeholder="Enter Age" name='age' className="w-44" onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Age" name='age' value={memberData.age} className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Relation</Label>
-                                <Input id="relation" placeholder="Enter Relation" name='relation' type="text" onChange={handleChange} />
+                                <Input id="relation" placeholder="Enter Relation" name='relation' value={memberData.relation} type="text" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">Membership Date</Label>
-                                <Input id="membership-date" placeholder="Enter Membership Date" name='membership_date' type="text" onChange={handleChange} />
+                                <Input id="membership-date" placeholder="Enter Membership Date" name='membership_date' value={memberData.membership_date} type="text" onChange={handleChange} />
                             </div>
                         </div>
 
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="age">Address</Label>
-                                <Input id="age" type="text" placeholder="Enter Address" name='address' className="w-44" onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Address" name='address' value={memberData.address} className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Gender</Label>
-                                <Input id="relation" placeholder="Enter Gender" type="text" name='gender' onChange={handleChange} />
+                                <Input id="relation" placeholder="Enter Gender" type="text" name='gender' value={memberData.gender} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">F/H Name</Label>
-                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='fh_name' onChange={handleChange} />
+                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='fh_name' value={memberData.fh_name} onChange={handleChange} />
                             </div>
                         </div>
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="age">Aadhar</Label>
-                                <Input id="age" type="text" placeholder="Enter Aadhar Number" name='aadhar' className="w-44" onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Aadhar Number" name='aadhar' value={memberData.aadhar} className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Bank Account Number</Label>
-                                <Input id="relation" placeholder="Enter Bank Acc No." type="text" name='bankacc_no' onChange={handleChange} />
+                                <Input id="relation" placeholder="Enter Bank Acc No." type="text" name='bankacc_no' value={memberData.bankacc_no} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">IFSC Code</Label>
-                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='ifsc' onChange={handleChange} />
+                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='ifsc'value={memberData.ifsc} onChange={handleChange} />
                             </div>
                         </div>
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-24 w-72">
                                 <Label htmlFor="age">Bank Name</Label>
-                                <Input id="age" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72" onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72"value={memberData.bank_name} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Bank Address</Label>
-                                <Input id="relation" placeholder="Enter Bank Address" type="text" name='bank_add' className="w-72" onChange={handleChange} />
+                                <Input id="relation" placeholder="Enter Bank Address" type="text" name='bank_add' value={memberData.bank_add} className="w-72" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="age">Loan Guarantee</Label>
-                                <Input id="age" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' className="w-56" onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' value={memberData.loan_guarantee} className="w-56" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Shares</Label>
-                                <Input id="relation" placeholder="Enter No. of Shares" type="text" name='shares' onChange={handleChange} />
+                                <Input id="relation" placeholder="Enter No. of Shares" type="text" name='shares' value={memberData.shares} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">Status</Label>
-                                <Input id="membership-date" placeholder="Enter Status" type="text" name='status' onChange={handleChange} />
+                                <Input id="membership-date" placeholder="Enter Status" type="text" name='status' value={memberData.status} onChange={handleChange} />
                             </div>
                         </div>
                         <div className="flex mt-4">

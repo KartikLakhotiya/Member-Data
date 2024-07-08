@@ -45,6 +45,10 @@ export function FetchMember() {
             name: name,
         };
 
+
+
+
+
         const response = await fetch(
             "https://member-data-qtrd.onrender.com/api/auth/searchmember",
             {
@@ -56,6 +60,8 @@ export function FetchMember() {
             }
         );
 
+        
+
         if (response.ok) {
             toast({
                 variant: "success",
@@ -65,12 +71,12 @@ export function FetchMember() {
             toast({
                 variant: "destructive",
                 title: "Error Occured.",
-                description: "Username or Password is incorrect."
+                description: "No Member found."
             });
             return
         }
-        const fetchedMember = response.json();
-        fetchedMember
+        const fetchMember = response.json();
+        fetchMember
             .then((obj) => {
                 console.log(obj)
                 setMember(obj);
@@ -81,8 +87,6 @@ export function FetchMember() {
     useEffect(() => {
         focusInput();
     }, [])
-
-    console.log(fetchedMember)
 
 
     return (

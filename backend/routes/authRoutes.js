@@ -4,11 +4,13 @@ import { searchMember } from '../controller/searchMember.js';
 import { editMember } from '../controller/editMember.js';
 import { allMembers } from '../controller/allMembers.js';
 import { deleteMember } from '../controller/deleteMember.js';
+import { findMember } from '../controller/findMember.js';
 const router = express.Router();
 
 router.post('/addmember', addMember)
 router.post('/searchmember', searchMember)
 router.post('/allmembers', allMembers)
+router.post('/find/:id', findMember)
 router.post('/editmember/:id', editMember)
 router.delete('/delete/:id', deleteMember)
 
