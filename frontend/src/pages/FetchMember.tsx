@@ -34,12 +34,7 @@ export function FetchMember() {
             title: "Fetching Member Data.",
         });
 
-        // Validations
-        if (name === "")
-            return toast({
-                variant: "destructive",
-                title: "Username Cannot be Empty",
-            });
+
 
         const data = {
             name: name,
@@ -50,7 +45,7 @@ export function FetchMember() {
 
 
         const response = await fetch(
-            "https://member-data-qtrd.onrender.com/api/auth/searchmember",
+            "http://localhost:5000/api/auth/searchmember",
             {
                 method: "POST",
                 headers: {
@@ -60,7 +55,9 @@ export function FetchMember() {
             }
         );
 
-        
+        // Validations
+
+
 
         if (response.ok) {
             toast({
@@ -70,8 +67,7 @@ export function FetchMember() {
         } else {
             toast({
                 variant: "destructive",
-                title: "Error Occured.",
-                description: "No Member found."
+                title: "No Member found."
             });
             return
         }

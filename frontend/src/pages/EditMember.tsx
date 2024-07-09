@@ -15,6 +15,7 @@ import axios from 'axios'
 
 export const EditMember = () => {
     const { id } = useParams();
+    const [ifsc, setIfsc] = useState(false);
     const { toast } = useToast();
     const navigate = useNavigate();
     const [memberData, setMemberData] = useState({
@@ -78,8 +79,8 @@ export const EditMember = () => {
 
     const fetchMemberData = async () => {
         try {
-            const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/find/${id}`,{
-                method:'POST'
+            const response = await fetch(`https://member-data-qtrd.onrender.com/api/auth/find/${id}`, {
+                method: 'POST'
             });
             if (response.ok) {
                 const member = await response.json();
@@ -101,6 +102,16 @@ export const EditMember = () => {
     };
 
     const submit = async () => {
+        // validation
+        const ifsc_code = /^[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/.test(memberData.ifsc)
+        if (!ifsc_code) {
+            setIfsc(true);
+            toast({
+                variant: "destructive",
+                title: "Invalid IFSC Code."
+            })
+            return
+        }
         try {
             toast({
                 variant: "default",
@@ -123,6 +134,7 @@ export const EditMember = () => {
             }
 
             console.log(response)
+
 
             const member = await response.json();
             setMemberData(member)
@@ -159,7 +171,7 @@ export const EditMember = () => {
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="family-head">Family Head</Label>
-                                <Input id="family-head" placeholder="Enter Family Head" name='familyHead'value={memberData.familyHead} className="w-66" type="text" onChange={handleChange} />
+                                <Input id="family-head" placeholder="Enter Family Head" name='familyHead' value={memberData.familyHead} className="w-66" type="text" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="name">Name</Label>
@@ -170,7 +182,7 @@ export const EditMember = () => {
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="phone-number">Phone Number</Label>
-                                <Input id="phone-number" type="text" placeholder="Enter Phone Number" name='phone'value={memberData.phone} className="w-44" onChange={handleChange} />
+                                <Input id="phone-number" type="text" placeholder="Enter Phone Number" name='phone' value={memberData.phone} className="w-44" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="dob">DOB</Label>
@@ -178,7 +190,7 @@ export const EditMember = () => {
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="nominee">Nominee</Label>
-                                <Input id="nominee" placeholder="Enter Nominee Name" name='nominee'value={memberData.nominee} type="text" onChange={handleChange} />
+                                <Input id="nominee" placeholder="Enter Nominee Name" name='nominee' value={memberData.nominee} type="text" onChange={handleChange} />
                             </div>
                         </div>
 
@@ -222,13 +234,14 @@ export const EditMember = () => {
                             </div>
                             <div className="flex flex-col space-y-1.5">
                                 <Label htmlFor="membership-date">IFSC Code</Label>
-                                <Input id="membership-date" placeholder="Enter F/H Name" type="text" name='ifsc'value={memberData.ifsc} onChange={handleChange} />
+                                <Input id="membership-date" placeholder="Enter IFSC Code" type="text" name='ifsc' value={memberData.ifsc} onChange={handleChange} />
+                                {ifsc && <p className="text-sm text-red-500 ml-2">Invalid IFSC Code.</p>}
                             </div>
                         </div>
                         <div className="flex mt-4">
                             <div className="flex flex-col space-y-1.5 mr-24 w-72">
                                 <Label htmlFor="age">Bank Name</Label>
-                                <Input id="age" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72"value={memberData.bank_name} onChange={handleChange} />
+                                <Input id="age" type="text" placeholder="Enter Bank Name" name='bank_name' className="w-72" value={memberData.bank_name} onChange={handleChange} />
                             </div>
                             <div className="flex flex-col space-y-1.5 mr-11">
                                 <Label htmlFor="relation">Bank Address</Label>

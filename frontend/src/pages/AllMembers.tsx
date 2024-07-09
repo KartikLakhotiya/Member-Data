@@ -115,6 +115,7 @@ export function AllMembers() {
       variant: 'success',
       title: 'Members Data Fetched.'
     })
+    setSearchTerm('');
   };
   React.useEffect(() => {
     fetchAllMembers();
