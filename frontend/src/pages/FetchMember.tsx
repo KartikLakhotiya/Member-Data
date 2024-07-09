@@ -45,7 +45,7 @@ export function FetchMember() {
 
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/searchmember",
+            "https://member-data-qtrd.onrender.com/api/auth/searchmember",
             {
                 method: "POST",
                 headers: {
