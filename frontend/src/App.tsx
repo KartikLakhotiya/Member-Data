@@ -13,24 +13,24 @@ function App() {
 
   return (
     <ThemeProvider>
-        <motion.div
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <Router>
-        <Navbar/>
-        <Toaster/>
-        <Routes>
-          <Route path='/' element={<AllMembers/>} />
-          <Route path='/fetch' element={<FetchMember/>} />
-          <Route path='/add' element={<AddMember/>} />
-          <Route path='/edit-member/:id' element={<EditMember/>} />
-        </Routes>
-      </Router>
+      <motion.div
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <Router>
+          <Navbar />
+          <Toaster />
+          <Routes>
+            <Route path='/' element={<AllMembers />} />
+            <Route path='/fetch' element={<FetchMember />} />
+            <Route path='/add' element={<AddMember />} />
+            <Route path='/edit-member/:id' element={<EditMember />} />
+          </Routes>
+        </Router>
 
-    </motion.div>
-      </ThemeProvider>
+      </motion.div>
+    </ThemeProvider>
   )
 }
 

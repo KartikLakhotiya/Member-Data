@@ -162,129 +162,131 @@ export function AddMember() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2 }}
         >
-            <Card className="w-[800px] mr-auto ml-auto mt-4 mb-0">
-                <CardHeader>
-                    <CardTitle>Add Member</CardTitle>
-                    <CardDescription>Add a new member to the Database.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="grid w-full items-center gap-4">
-                        <div className="flex">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="member-id">Member ID</Label>
-                                <Input id="member-id" type="text" ref={inputRef} name='member_id' value={memberData.member_id} className="w-44" placeholder="Enter Member ID" onChange={handleChange} />
+            <div className="addmember w-[900px] items-center mr-auto ml-auto p-4 mt-4 mb-4">
+                <Card className="w-[800px] mr-auto ml-auto mt-4 mb-0">
+                    <CardHeader>
+                        <CardTitle>Add Member</CardTitle>
+                        <CardDescription>Add a new member to the Database.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid w-full items-center gap-4">
+                            <div className="flex">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="member-id">Member ID</Label>
+                                    <Input id="member-id" type="text" ref={inputRef} name='member_id' value={memberData.member_id} className="w-44" placeholder="Enter Member ID" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="family-head">Family Head</Label>
+                                    <Input id="family-head" placeholder="Enter Family Head" name='familyHead' value={memberData.familyHead} className="w-66" type="text" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="name">Name</Label>
+                                    <Input id="name" placeholder="Enter Name" type="text" name='name' value={memberData.name} onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="family-head">Family Head</Label>
-                                <Input id="family-head" placeholder="Enter Family Head" name='familyHead' value={memberData.familyHead} className="w-66" type="text" onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="name">Name</Label>
-                                <Input id="name" placeholder="Enter Name" type="text" name='name' value={memberData.name} onChange={handleChange} />
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="phone-number">Phone Number</Label>
-                                <Input id="phone-number" type="text" placeholder="Enter Phone Number" value={memberData.phone} name='phone' className="w-44" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="phone-number">Phone Number</Label>
+                                    <Input id="phone-number" type="text" placeholder="Enter Phone Number" value={memberData.phone} name='phone' className="w-44" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="dob">DOB</Label>
+                                    <Input id="dob" placeholder="Enter DOB" type="text" name='dob' value={memberData.dob} onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="nominee">Nominee</Label>
+                                    <Input id="nominee" placeholder="Enter Nominee Name" name='nominee' value={memberData.nominee} type="text" onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="dob">DOB</Label>
-                                <Input id="dob" placeholder="Enter DOB" type="text" name='dob' value={memberData.dob} onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="nominee">Nominee</Label>
-                                <Input id="nominee" placeholder="Enter Nominee Name" name='nominee' value={memberData.nominee} type="text" onChange={handleChange} />
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="age">Age</Label>
-                                <Input id="age" type="text" placeholder="Enter Age" name='age' value={memberData.age} className="w-44" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="age">Age</Label>
+                                    <Input id="age" type="text" placeholder="Enter Age" name='age' value={memberData.age} className="w-44" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="relation">Relation</Label>
+                                    <Input id="relation" placeholder="Enter Relation" name='relation' value={memberData.relation} type="text" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="membership-date">Membership Date</Label>
+                                    <Input id="membership-date" placeholder="Enter Membership Date" name='membership_date' value={memberData.membership_date} type="text" onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="relation">Relation</Label>
-                                <Input id="relation" placeholder="Enter Relation" name='relation' value={memberData.relation} type="text" onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="membership-date">Membership Date</Label>
-                                <Input id="membership-date" placeholder="Enter Membership Date" name='membership_date' value={memberData.membership_date} type="text" onChange={handleChange} />
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="address">Address</Label>
-                                <Input id="address" type="text" placeholder="Enter Address" name='address' value={memberData.address} className="w-44" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="address">Address</Label>
+                                    <Input id="address" type="text" placeholder="Enter Address" name='address' value={memberData.address} className="w-44" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="gender">Gender</Label>
+                                    <Input id="gender" placeholder="Enter Gender" type="text" name='gender' value={memberData.gender} onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="fh_name">F/H Name</Label>
+                                    <Input id="fh_name" placeholder="Enter F/H Name" type="text" name='fh_name' value={memberData.fh_name} onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="gender">Gender</Label>
-                                <Input id="gender" placeholder="Enter Gender" type="text" name='gender' value={memberData.gender} onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="fh_name">F/H Name</Label>
-                                <Input id="fh_name" placeholder="Enter F/H Name" type="text" name='fh_name' value={memberData.fh_name} onChange={handleChange} />
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="aadhar">Aadhar</Label>
-                                <Input id="aadhar" type="text" placeholder="Enter Aadhar Number" name='aadhar' value={memberData.aadhar} className="w-44" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="aadhar">Aadhar</Label>
+                                    <Input id="aadhar" type="text" placeholder="Enter Aadhar Number" name='aadhar' value={memberData.aadhar} className="w-44" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="bankacc_no">Bank Account Number</Label>
+                                    <Input id="bankacc_no" placeholder="Enter Bank Acc No." type="text" value={memberData.bankacc_no} name='bankacc_no' onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="ifsc">IFSC Code</Label>
+                                    <Input id="ifsc" placeholder="Enter IFSC Code" type="text" name='ifsc' value={memberData.ifsc} onChange={handleChange} />
+                                    {ifsc && <p className="text-sm text-red-500 ml-2">Invalid IFSC Code.</p>}
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="bankacc_no">Bank Account Number</Label>
-                                <Input id="bankacc_no" placeholder="Enter Bank Acc No." type="text" value={memberData.bankacc_no} name='bankacc_no' onChange={handleChange} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="ifsc">IFSC Code</Label>
-                                <Input id="ifsc" placeholder="Enter IFSC Code" type="text" name='ifsc' value={memberData.ifsc} onChange={handleChange} />
-                                {ifsc && <p className="text-sm text-red-500 ml-2">Invalid IFSC Code.</p>}
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-24 w-72">
-                                <Label htmlFor="bank_name">Bank Name</Label>
-                                <Input id="bank_name" type="text" placeholder="Enter Bank Name" name='bank_name' value={memberData.bank_name} className="w-72" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-24 w-72">
+                                    <Label htmlFor="bank_name">Bank Name</Label>
+                                    <Input id="bank_name" type="text" placeholder="Enter Bank Name" name='bank_name' value={memberData.bank_name} className="w-72" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="bank_add">Bank Address</Label>
+                                    <Input id="bank_add" placeholder="Enter Bank Address" type="text" name='bank_add' value={memberData.bank_add} className="w-72" onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="bank_add">Bank Address</Label>
-                                <Input id="bank_add" placeholder="Enter Bank Address" type="text" name='bank_add' value={memberData.bank_add} className="w-72" onChange={handleChange} />
-                            </div>
-                        </div>
 
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="loan_guarantee">Loan Guarantee</Label>
-                                <Input id="loan_guarantee" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' value={memberData.loan_guarantee} className="w-56" onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="loan_guarantee">Loan Guarantee</Label>
+                                    <Input id="loan_guarantee" type="text" placeholder="Enter Loan Guarantee" name='loan_guarantee' value={memberData.loan_guarantee} className="w-56" onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="shares">Shares</Label>
+                                    <Input id="shares" placeholder="Enter No. of Shares" type="text" name='shares' value={memberData.shares} onChange={handleChange} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                    <Label htmlFor="status">Status</Label>
+                                    <Input id="status" placeholder="Enter Status" type="text" name='status' value={memberData.status} onChange={handleChange} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="shares">Shares</Label>
-                                <Input id="shares" placeholder="Enter No. of Shares" type="text" name='shares' value={memberData.shares} onChange={handleChange} />
+                            <div className="flex mt-4">
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="profile-image">Profile Image</Label>
+                                    <Input id="profile-image" name='profileImage' type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'profileImage')} />
+                                </div>
+                                <div className="flex flex-col space-y-1.5 mr-11">
+                                    <Label htmlFor="signature">Signature</Label>
+                                    <Input id="signature" type="file" name="signature" accept="image/*" onChange={(e) => handleFileChange(e, 'signature')} />
+                                </div>
                             </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="status">Status</Label>
-                                <Input id="status" placeholder="Enter Status" type="text" name='status' value={memberData.status} onChange={handleChange} />
-                            </div>
-                        </div>
-                        <div className="flex mt-4">
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="profile-image">Profile Image</Label>
-                                <Input id="profile-image" name='profileImage' type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'profileImage')} />
-                            </div>
-                            <div className="flex flex-col space-y-1.5 mr-11">
-                                <Label htmlFor="signature">Signature</Label>
-                                <Input id="signature" type="file" name="signature" accept="image/*" onChange={(e) => handleFileChange(e, 'signature')} />
-                            </div>
-                        </div>
 
-                        <Button className="mt-4 w-[20rem] items-center justify-center mr-auto ml-auto" type="submit" onClick={submit}>Submit</Button>
-                    </div>
-                </CardContent>
-            </Card>
+                            <Button className="mt-4 w-[20rem] items-center justify-center mr-auto ml-auto" type="submit" onClick={submit}>Submit</Button>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </motion.div>
     );
 }

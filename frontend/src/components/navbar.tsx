@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
     return (
         <div>
             <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900 w-full">
@@ -32,7 +31,7 @@ const Navbar = () => {
                     </button>
                     <div className={`${isOpen ? 'block' : 'hidden'} w-full lg:block lg:w-auto`} id="navbar-default">
                         <div className="flex flex-col lg:flex-row lg:items-center">
-                            <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 rounded-lg  lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0  lg:dark:bg-gray-900 dark:border-gray-700 mr-[21rem] lg:w-max lg:mr-[27rem]">
+                            <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 rounded-lg  lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0  lg:dark:bg-gray-900 dark:border-gray-700 mr-[21rem] lg:w-max lg:mr-[21rem]">
                                 <li>
                                     <Link to='/'><Button variant="outline" onClick={() => setIsOpen(false)}>HOME</Button></Link>
                                 </li>
@@ -42,9 +41,9 @@ const Navbar = () => {
                                 <li>
                                     <Link to='/fetch'><Button variant="outline" onClick={() => setIsOpen(false)}>SEARCH MEMBER</Button></Link>
                                 </li>
-                                {/* <li>
-                                    <Link to='/allstudents'><Button variant="outline" onClick={() => setIsOpen(false)}>ALL STUDENTS</Button></Link>
-                                </li> */}
+                                <li>
+                                    <Link to='/loan'><Button variant="outline" onClick={() => setIsOpen(false)}>LOAN</Button></Link>
+                                </li>
                             </ul>
                             <div className="ml-auto md:ml-0">
                                 <ModeToggle />

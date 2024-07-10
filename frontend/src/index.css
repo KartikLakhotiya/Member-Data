@@ -20,7 +20,11 @@
 .custom-table {
   width: 100%;
 }
-
+.addmember{
+  border: 5px solid rgb(83, 35, 35);
+  border-radius: 20px;
+  background-color: #FFE5B4;
+}
 .custom-table-cell {
   min-width: 175px; /* Adjust this value as needed */
   word-wrap: break-word; /* Ensure text wraps properly */
