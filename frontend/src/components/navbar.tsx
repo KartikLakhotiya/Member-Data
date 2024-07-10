@@ -41,9 +41,6 @@ const Navbar = () => {
                                 <li>
                                     <Link to='/fetch'><Button variant="outline" onClick={() => setIsOpen(false)}>SEARCH MEMBER</Button></Link>
                                 </li>
-                                <li>
-                                    <Link to='/loan'><Button variant="outline" onClick={() => setIsOpen(false)}>LOAN</Button></Link>
-                                </li>
                             </ul>
                             <div className="ml-auto md:ml-0">
                                 <ModeToggle />
