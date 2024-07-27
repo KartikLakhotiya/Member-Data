@@ -79,7 +79,7 @@ export const EditMember = () => {
 
     const fetchMemberData = async () => {
         try {
-            const response = await fetch(`https://member-data-2mt2.onrender.com/api/auth/find/${id}`, {
+            const response = await fetch(`https://member-data-pztw.onrender.com/api/auth/find/${id}`, {
                 method: 'POST'
             });
             if (response.ok) {
@@ -118,7 +118,7 @@ export const EditMember = () => {
                 title: "Editing Member Data"
             })
 
-            const response = await fetch(`https://member-data-2mt2.onrender.com/api/auth/editmember/${id}`, {
+            const response = await fetch(`https://member-data-pztw.onrender.com/api/auth/editmember/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -45,7 +45,7 @@ export function FetchMember() {
 
 
         const response = await fetch(
-            "https://member-data-2mt2.onrender.com/api/auth/searchmember",
+            "https://member-data-pztw.onrender.com/api/auth/searchmember",
             {
                 method: "POST",
                 headers: {

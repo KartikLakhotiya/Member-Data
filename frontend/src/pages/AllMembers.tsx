@@ -103,7 +103,7 @@ export function AllMembers() {
       variant: 'default',
       title: 'Fetching Members Data.'
     })
-    const response = await fetch('https://member-data-2mt2.onrender.com/api/auth/allmembers', {
+    const response = await fetch('https://member-data-pztw.onrender.com/api/auth/allmembers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -183,7 +183,7 @@ export function AllMembers() {
     });
 
     try {
-      const response = await fetch(`https://member-data-2mt2.onrender.com/api/auth/delete/${id}`, {
+      const response = await fetch(`https://member-data-pztw.onrender.com/api/auth/delete/${id}`, {
         method: 'DELETE',
       });
 
