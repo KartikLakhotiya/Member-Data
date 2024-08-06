@@ -102,7 +102,7 @@ export function AddMember() {
 
             console.log('Member Data with Files:', memberDataWithFiles);
 
-            const response = await fetch('https://member-data-pztw.onrender.com/api/auth/addmember', {
+            const response = await fetch('https://member-data-6l3t.onrender.com/api/auth/addmember', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
